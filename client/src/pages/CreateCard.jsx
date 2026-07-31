@@ -349,27 +349,6 @@ const CreateCard = () => {
         </div>
       ) : (
         <div style={{ width: "100%", maxWidth: 520, position: "relative" }}>
-          <button
-            onClick={() => setViewMode("form")}
-            style={{
-              position: "absolute",
-              top: 16,
-              left: 16,
-              zIndex: 50,
-              background: "rgba(255,255,255,0.9)",
-              padding: "7px 14px",
-              borderRadius: 999,
-              boxShadow: "0 2px 8px rgba(61,34,51,0.1)",
-              fontSize: 12,
-              fontWeight: 700,
-              color: palette.plum,
-              border: `1px solid ${palette.blush}`,
-              cursor: "pointer",
-            }}
-          >
-            ← Back to edit
-          </button>
-
           <StoryFlow
             receiverName={formData.receiverName}
             senderName={formData.senderName}
