@@ -1,0 +1,25 @@
+import { StatusCodes } from "http-status-codes";
+
+const validate = (schema) => {
+  return (req, res, next) => {
+    const result = schema.safeParse(req.body);
+
+    if (!result.success) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Validation failed",
+        errors: result.error.issues.map((issue) => ({
+          field: issue.path.join("."),
+          message: issue.message,
+        })),
+      });
+    }
+
+    // Use the parsed (and potentially transformed) data
+    req.body = result.data;
+
+    next();
+  };
+};
+
+export default validate;
