@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { createCard } from "../services/card.service";
 import { uploadImage, uploadMusic } from "../services/upload.service";
 import StoryFlow from "../components/StoryFlow";
+import { IoClose } from "react-icons/io5";
 
 const palette = {
   cream: "#FFF8F2",
@@ -105,7 +106,7 @@ const CreateCard = () => {
       try {
         await navigator.share({
           title: `🎉 Birthday Surprise for ${formData.receiverName}`,
-          text: `${formData.senderName} has made something special for you ❤️`,
+          text: `Open to see your surprise 🎁`,
           url: createdCard.shareUrl,
         });
   
@@ -400,6 +401,7 @@ const CreateCard = () => {
         >
           <div
             style={{
+              position: "relative",
               background: "white",
               borderRadius: 28,
               padding: "36px 28px",
@@ -412,6 +414,37 @@ const CreateCard = () => {
               alignItems: "center"
             }}
           >
+            <button
+              onClick={() => setCreatedCard(null)}
+              style={{
+                position: "absolute",
+                top: 16,
+                right: 16,
+                width: 36,
+                height: 36,
+                borderRadius: "50%",
+                border: "none",
+                background: "transparent",
+                color: "#888",
+                fontSize: 24,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#f5f5f5";
+                e.currentTarget.style.color = "#E1476B";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "#888";
+              }}
+            >
+              <IoClose size={24} />
+            </button>
+
             <div style={{ fontSize: 48, marginBottom: 12, animation: "bounce 2s infinite" }}>🎉</div>
             <h2 className="font-display" style={{ fontSize: 24, fontWeight: 600, color: palette.plum, margin: "0 0 10px" }}>
               Card Created Successfully!
