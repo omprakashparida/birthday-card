@@ -1,14 +1,14 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/Home";
 import CreateCard from "../pages/CreateCard";
-import ViewCard from "../pages/ViewCard"; // <-- This imports the file below
+import ViewCard from "../pages/ViewCard";
 import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navigate to="/create" replace />} />
         <Route path="/create" element={<CreateCard />} />
         <Route path="/card/:slug" element={<ViewCard />} />
         <Route path="*" element={<NotFound />} />
