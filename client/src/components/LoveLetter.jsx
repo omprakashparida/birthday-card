@@ -47,7 +47,7 @@ const LetterContent = ({ message, senderName }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    const initialDelay = setTimeout(() => setStep(1), 300);
+    const initialDelay = setTimeout(() => setStep(1), 400);
     return () => clearTimeout(initialDelay);
   }, []);
 
@@ -73,38 +73,49 @@ const LetterContent = ({ message, senderName }) => {
   }, [step, message]);
 
   return (
-    <div 
-      ref={containerRef}
-      className="w-full h-full overflow-y-auto px-6 py-8 sm:px-10 sm:py-10 custom-scrollbar"
-    >
-      <p className="text-slate-700 text-[15px] sm:text-[17px] leading-[1.8] sm:leading-relaxed whitespace-pre-wrap min-h-[100px]">
-        {typedText}
-        {step === 1 && (
-          <motion.span
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ repeat: Infinity, duration: 0.8 }}
-            className="inline-block w-[2px] h-[1em] bg-rose-400 align-middle ml-1"
-          />
-        )}
-      </p>
+    <div className="w-full h-full p-3 sm:p-5 bg-[#fffdf8]">
+      <div className="w-full h-full border-[1.5px] border-dashed border-rose-200/80 rounded-xl relative overflow-hidden flex flex-col">
+        <div 
+          ref={containerRef}
+          className="w-full h-full overflow-y-auto px-5 py-8 sm:px-8 sm:py-10 custom-scrollbar flex flex-col relative"
+        >
+          {/* Top Decorative Flourish for perfect symmetry */}
+          <div className="w-full flex justify-center mb-6 opacity-60 shrink-0">
+            <span className="text-rose-400 text-2xl drop-shadow-sm">❦</span>
+          </div>
 
-      <AnimatePresence>
-        {step >= 2 && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mt-8 text-right pb-10"
-          >
-            <p className="text-rose-500 italic text-base sm:text-lg font-medium">
-              With love,
+          <div className="flex-1">
+            <p className="text-slate-700 text-[15px] sm:text-[17px] leading-[2.2] sm:leading-[2.4] whitespace-pre-wrap font-serif tracking-wide text-center sm:text-left">
+              {typedText}
+              {step === 1 && (
+                <motion.span
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ repeat: Infinity, duration: 0.8 }}
+                  className="inline-block w-[2px] h-[1em] bg-rose-400 align-middle ml-1"
+                />
+              )}
             </p>
-            <p className="text-rose-600 italic text-xl sm:text-2xl font-bold mt-1">
-              {senderName} ❤️
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+
+          <AnimatePresence>
+            {step >= 2 && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="mt-10 pt-6 border-t border-rose-200/50 flex flex-col items-center sm:items-end shrink-0"
+              >
+                <p className="text-rose-400 italic text-sm sm:text-base font-medium mb-1">
+                  With love,
+                </p>
+                <p className="text-rose-600 italic text-xl sm:text-2xl font-bold font-serif">
+                  {senderName} ❤️
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
     </div>
   );
 };
@@ -203,14 +214,14 @@ const LoveLetter = ({
       </motion.div>
 
       <motion.div
-        className="absolute bg-[#fffdf7] rounded-sm shadow-2xl flex flex-col overflow-hidden border border-stone-200/60"
+        className="absolute bg-[#fffdf8] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-rose-100"
         initial={{ width: 270, height: 170, y: 0, zIndex: 20 }}
         animate={
           phase === "closed" 
             ? { width: 270, height: 170, y: 0, zIndex: 20 } 
             : phase === "opening" 
             ? { width: 270, height: 170, y: -40, zIndex: 20 } 
-            : { width: "90vw", maxWidth: 500, height: "70dvh", y: "0dvh", zIndex: 50 }
+            : { width: "92vw", maxWidth: 540, height: "75dvh", maxHeight: 720, y: "0dvh", zIndex: 50 }
         }
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
       >
